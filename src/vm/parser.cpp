@@ -10,6 +10,7 @@
 #include "extern_objs/data_types/obj_str.hpp"
 #include "extern_objs/data_structs/struct_list.hpp"
 #include "extern_objs/data_structs/struct_dict.hpp"
+#include "extern_objs/data_structs/struct_set.hpp"
 
 #define FLAG_REF '\x80'
 
@@ -103,6 +104,7 @@ void parser::initialize() {
     class_str::return_instance()->initialize();
     class_list::return_instance()->initialize();
     class_dict::return_instance()->initialize();
+    class_set::return_instance()->initialize();
     class_pkg::return_instance()->initialize();
     
     class_int::return_instance()->order_super_list();
@@ -110,6 +112,7 @@ void parser::initialize() {
     class_str::return_instance()->order_super_list();
     class_list::return_instance()->order_super_list();
     class_dict::return_instance()->order_super_list();
+    class_set::return_instance()->order_super_list();
     class_func::return_instance()->order_super_list();
     class_native_func::return_instance()->order_super_list();
     class_method::return_instance()->order_super_list();
@@ -219,11 +222,14 @@ inner_array<base_obj *> *parser::parse_list(int ref_flag) {
                 list->add(_ref_list.get(file_stream->read_int() - 1));
                 break;
             case '(':
-                //struct_list* tmp_list = ;
                 list->add(new struct_list(parse_list(flag)));
                 break;
             case ')':
                 list->add(new struct_list(parse_short_list(flag)));
+                break;
+            case '<':
+            case '>':
+                list->add(new struct_set(parse_list(flag)));
                 break;
             default:
                 printf("Error: unrecognized type %c\n", obj_type);
@@ -289,6 +295,10 @@ inner_array<base_obj *> *parser::parse_short_list(int ref_flag) {
                 break;
             case ')':
                 list->add(new struct_list(parse_short_list(flag)));
+                break;
+            case '<':
+            case '>':
+                list->add(new struct_set(parse_list(flag)));
                 break;
             default:
                 printf("Error: unrecognized type %c\n", obj_type);

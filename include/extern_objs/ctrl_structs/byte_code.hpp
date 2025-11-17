@@ -38,6 +38,7 @@ public:
     static const unsigned char LOAD_NAME = 101;
     static const unsigned char BUILD_TUPLE = 102;
     static const unsigned char BUILD_LIST = 103;
+    static const unsigned char BUILD_SET = 104;
     static const unsigned char BUILD_MAP = 105;
     static const unsigned char LOAD_ATTR = 106;
     static const unsigned char COMPARE_OP = 107;
@@ -55,6 +56,7 @@ public:
     static const unsigned char SETUP_FINALLY = 122;
     static const unsigned char LOAD_FAST = 124;
     static const unsigned char STORE_FAST = 125;
+    static const unsigned char GEN_START = 129;
     static const unsigned char RAISE_VARARGS = 130;
     static const unsigned char CALL_FUNCTION = 131;
     static const unsigned char MAKE_FUNCTION = 132;
@@ -69,6 +71,7 @@ public:
     static const unsigned char LOAD_METHOD = 160;
     static const unsigned char CALL_METHOD = 161;
     static const unsigned char LIST_EXTEND = 162;
+    static const unsigned char SET_UPDATE = 163;
     enum compare_op {
         LESS = 0,
         LESS_EQUAL = 1,

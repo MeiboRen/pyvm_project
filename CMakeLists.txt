@@ -15,6 +15,7 @@ src/extern_objs/data_types/obj_float.cpp
 src/extern_objs/data_types/obj_str.cpp
 src/extern_objs/data_structs/struct_list.cpp
 src/extern_objs/data_structs/struct_dict.cpp
+src/extern_objs/data_structs/struct_set.cpp
 src/extern_objs/ctrl_structs/struct_call.cpp
 src/extern_objs/ctrl_structs/struct_closure.cpp
 src/extern_objs/ctrl_structs/struct_code.cpp

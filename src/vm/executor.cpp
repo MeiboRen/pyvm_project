@@ -14,6 +14,7 @@
 #include "extern_objs/data_types/obj_str.hpp"
 #include "extern_objs/data_structs/struct_list.hpp"
 #include "extern_objs/data_structs/struct_dict.hpp"
+#include "extern_objs/data_structs/struct_set.hpp"
 
 executor *executor::_instance = NULL;
 
@@ -50,6 +51,7 @@ void executor::initialize() {
     _builtins->put(new obj_str("str"), class_str::return_instance()->get_type_object());
     _builtins->put(new obj_str("list"), class_list::return_instance()->get_type_object());
     _builtins->put(new obj_str("dict"), class_dict::return_instance()->get_type_object());
+    _builtins->put(new obj_str("set"), class_set::return_instance()->get_type_object());
     _builtins->put(new obj_str("len"), new struct_func(len));
     _builtins->put(new obj_str("type"), new struct_func(type));
     _builtins->put(new obj_str("isinstance"), new struct_func(isinstance));
@@ -385,6 +387,15 @@ void executor::execute_frame() {
             _frames->stack()->append(obj1);
             goto check_status;
         }
+        else if (op_code == byte_code::BUILD_SET) {
+            struct_set *set_obj = new struct_set();
+            while (op_arg--) {
+                base_obj *item = _frames->stack()->pop();
+                set_obj->add(item);
+            }
+            _frames->stack()->append(set_obj);
+            goto check_status;
+        }
         else if (op_code == byte_code::BUILD_MAP) {
             obj1 = new struct_dict();
             for(int i = 0;i < op_arg ;i++) {
@@ -568,6 +579,10 @@ void executor::execute_frame() {
             _frames->fast_locals()->set(op_arg, _frames->stack()->pop());
             goto check_status;
         }
+        else if (op_code == byte_code::GEN_START) {
+            _frames->stack()->pop();
+            goto check_status;
+        }
         else if (op_code == byte_code::RAISE_VARARGS) {
             obj1 = obj2 = obj3 = NULL;
             switch (op_arg) {
@@ -724,6 +739,36 @@ void executor::execute_frame() {
             int index = _frames->stack()->size() - op_arg;
             struct_list *peek_list = (struct_list *)_frames->stack()->get(index);
             for(int i = 0;i < l->size();i++) peek_list->append(l->get(i));
+            goto check_status;
+        }
+        /*else if (op_code == byte_code::SET_UPDATE) {
+            obj1 = _frames->stack()->pop();
+            obj2 = _frames->stack()->get(_frames->stack()->size() - 1 - op_arg);
+            if (obj2->get_instance() == class_set::return_instance()) {
+                ((struct_set *)obj2)->update(obj1);
+            }
+            goto check_status;
+        }*/
+        else if (op_code == byte_code::SET_UPDATE) {
+            if (_frames->stack()->size() < 2) goto check_status;
+            int set_index = _frames->stack()->size() - 1 - op_arg;
+            base_obj *set_obj = _frames->stack()->get(set_index);
+            base_obj *iterable = _frames->stack()->pop();
+            if (set_obj->get_instance() == class_set::return_instance()) {
+                if (iterable->get_instance() == class_set::return_instance()) {
+                    struct_set *other_set = (struct_set *)iterable;
+                    for (int i = 0; i < other_set->size(); i++) {
+                        base_obj *item = other_set->get_inner_set()->get(i);
+                        ((struct_set *)set_obj)->add(item);
+                    }
+                } else {
+                    base_obj *iter_obj = iterable->iter();
+                    if (iter_obj && iter_obj != parser::obj_none) {
+                        base_obj *item;
+                        while ((item = iter_obj->next()) != NULL) ((struct_set *)set_obj)->add(item);
+                    }
+                }
+            } else printf("Error: SET_UPDATE expected set object\n");
             goto check_status;
         }
         else printf("Error: Unrecognized byte code %d\n", op_code);
