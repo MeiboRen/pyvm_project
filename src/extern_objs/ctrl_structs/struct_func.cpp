@@ -1,6 +1,6 @@
 #include "vm/parser.hpp"
 #include "vm/executor.hpp"
-#include "ctrl_structs/struct_func.hpp"
+#include "extern_objs/ctrl_structs/struct_func.hpp"
 #include "extern_objs/data_types/obj_int.hpp"
 #include "extern_objs/data_types/obj_str.hpp"
 #include "extern_objs/data_structs/struct_list.hpp"

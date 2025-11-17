@@ -2,10 +2,11 @@
 #include <assert.h>
 #include "vm/parser.hpp"
 #include "vm/executor.hpp"
-#include "ctrl_structs/struct_func.hpp"
-#include "ctrl_structs/struct_pkg.hpp"
+#include "extern_objs/ctrl_structs/struct_func.hpp"
+#include "extern_objs/ctrl_structs/struct_pkg.hpp"
 #include "extern_objs/base_obj.hpp"
 #include "extern_objs/data_types/obj_int.hpp"
+#include "extern_objs/data_types/obj_float.hpp"
 #include "extern_objs/data_types/obj_str.hpp"
 #include "extern_objs/data_structs/struct_list.hpp"
 #include "extern_objs/data_structs/struct_dict.hpp"
@@ -98,12 +99,14 @@ void parser::initialize() {
     type_instance->add_super_list(object_instance);
 
     class_int::return_instance()->initialize();
+    class_float::return_instance()->initialize();
     class_str::return_instance()->initialize();
     class_list::return_instance()->initialize();
     class_dict::return_instance()->initialize();
     class_pkg::return_instance()->initialize();
     
     class_int::return_instance()->order_super_list();
+    class_float::return_instance()->order_super_list();
     class_str::return_instance()->order_super_list();
     class_list::return_instance()->order_super_list();
     class_dict::return_instance()->order_super_list();
@@ -197,6 +200,13 @@ inner_array<base_obj *> *parser::parse_list(int ref_flag) {
                 if(flag) _ref_list.add(integer);
                 break;
             }
+            case 'f':
+            case 'g': {
+                obj_float* float_obj = new obj_float(file_stream->read_float());
+                list->add(float_obj);
+                if(flag) _ref_list.add(float_obj);
+                break;
+            }
             case 't':
             case 's':
                 list->add(parse_str(flag));
@@ -254,6 +264,13 @@ inner_array<base_obj *> *parser::parse_short_list(int ref_flag) {
                 obj_int* integer = new obj_int(file_stream->read_int());
                 list->add(integer);
                 if(flag) _ref_list.add(integer);
+                break;
+            }
+            case 'f':
+            case 'g': {
+                obj_float* float_obj = new obj_float(file_stream->read_float());
+                list->add(float_obj);
+                if(flag) _ref_list.add(float_obj);
                 break;
             }
             case 't':

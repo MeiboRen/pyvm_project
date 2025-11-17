@@ -1,7 +1,7 @@
 #pragma once
 #include <stdio.h>
 #include "builtin_objs/inner_array.hpp"
-#include "ctrl_structs/struct_code.hpp"
+#include "extern_objs/ctrl_structs/struct_code.hpp"
 #include "extern_objs/data_types/obj_str.hpp"
 
 class base_class;

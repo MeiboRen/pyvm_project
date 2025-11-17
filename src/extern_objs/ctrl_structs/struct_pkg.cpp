@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include "vm/parser.hpp"
 #include "vm/executor.hpp"
-#include "ctrl_structs/struct_pkg.hpp"
+#include "extern_objs/ctrl_structs/struct_pkg.hpp"
 #include "extern_objs/data_structs/struct_list.hpp"
 #include "extern_objs/data_structs/struct_dict.hpp"
 

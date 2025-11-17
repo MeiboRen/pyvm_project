@@ -4,6 +4,7 @@
 #include "vm/executor.hpp"
 #include "extern_objs/base_class.hpp"
 #include "extern_objs/data_types/obj_int.hpp"
+#include "extern_objs/data_types/obj_float.hpp"
 #include "extern_objs/data_types/obj_str.hpp"
 #include "extern_objs/data_structs/struct_dict.hpp"
 
@@ -40,6 +41,10 @@ base_obj *class_int::create_instance(base_obj *callable, inner_array<base_obj *>
     if (args->length() == 1) {
         base_obj* arg = args->get(0);
         if (arg->get_instance() == class_int::return_instance()) return arg;
+        if (arg->get_instance() == class_float::return_instance()) {
+            obj_float* float_arg = (obj_float*)arg;
+            return new obj_int((int)float_arg->get_value());
+        }
         if (arg->get_instance() == class_str::return_instance()) {
             obj_str* str_arg = (obj_str*)arg;
             char* endptr;

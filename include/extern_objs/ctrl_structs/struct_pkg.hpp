@@ -1,5 +1,5 @@
 #pragma once
-#include "ctrl_structs/struct_func.hpp"
+#include "extern_objs/ctrl_structs/struct_func.hpp"
 #include "extern_objs/base_obj.hpp"
 
 class struct_dict;

@@ -1,4 +1,4 @@
-#include "ctrl_structs/struct_code.hpp"
+#include "extern_objs/ctrl_structs/struct_code.hpp"
 #include "extern_objs/data_types/obj_str.hpp"
 
 class_code *class_code::instance = NULL;

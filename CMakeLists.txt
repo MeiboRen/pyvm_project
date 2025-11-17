@@ -5,21 +5,22 @@ include_directories(include/)
 
 set(sourcecode
 src/vm/parser.cpp
-src/extern_objs/data_types/obj_int.cpp
-src/extern_objs/data_types/obj_str.cpp
+src/vm/executor.cpp
 src/extern_objs/base_obj.cpp
-src/extern_objs/data_structs/struct_list.cpp
-src/extern_objs/data_structs/struct_dict.cpp
 src/extern_objs/base_class.cpp
 src/builtin_objs/inner_array.cpp
 src/builtin_objs/inner_dict.cpp
-src/vm/executor.cpp
-src/ctrl_structs/struct_call.cpp
-src/ctrl_structs/struct_func.cpp
-src/ctrl_structs/struct_pkg.cpp
-src/ctrl_structs/trace.cpp
-src/ctrl_structs/struct_closure.cpp
-src/ctrl_structs/struct_code.cpp
+src/extern_objs/data_types/obj_int.cpp
+src/extern_objs/data_types/obj_float.cpp
+src/extern_objs/data_types/obj_str.cpp
+src/extern_objs/data_structs/struct_list.cpp
+src/extern_objs/data_structs/struct_dict.cpp
+src/extern_objs/ctrl_structs/struct_call.cpp
+src/extern_objs/ctrl_structs/struct_closure.cpp
+src/extern_objs/ctrl_structs/struct_code.cpp
+src/extern_objs/ctrl_structs/struct_func.cpp
+src/extern_objs/ctrl_structs/struct_pkg.cpp
+src/extern_objs/ctrl_structs/trace.cpp
 )
 
 add_executable(pyvm pyvm/pyvm.cpp)

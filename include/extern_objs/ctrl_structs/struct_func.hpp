@@ -1,6 +1,6 @@
 #pragma once
 #include "builtin_objs/inner_dict.hpp"
-#include "ctrl_structs/struct_code.hpp"
+#include "extern_objs/ctrl_structs/struct_code.hpp"
 #include "extern_objs/base_class.hpp"
 
 class class_func : public base_class {

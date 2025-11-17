@@ -1,5 +1,5 @@
 #include "vm/parser.hpp"
-#include "ctrl_structs/struct_func.hpp"
+#include "extern_objs/ctrl_structs/struct_func.hpp"
 #include "extern_objs/base_obj.hpp"
 #include "extern_objs/data_types/obj_str.hpp"
 #include "extern_objs/data_structs/struct_dict.hpp"

@@ -1,8 +1,8 @@
 #pragma once
 #include <stdint.h>
-#include "ctrl_structs/byte_code.hpp"
-#include "ctrl_structs/struct_code.hpp"
-#include "ctrl_structs/struct_pkg.hpp"
+#include "extern_objs/ctrl_structs/byte_code.hpp"
+#include "extern_objs/ctrl_structs/struct_code.hpp"
+#include "extern_objs/ctrl_structs/struct_pkg.hpp"
 
 class struct_call;
 class struct_dict;

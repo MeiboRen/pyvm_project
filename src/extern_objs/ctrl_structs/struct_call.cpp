@@ -1,4 +1,4 @@
-#include "ctrl_structs/struct_call.hpp"
+#include "extern_objs/ctrl_structs/struct_call.hpp"
 #include "extern_objs/base_obj.hpp"
 #include "extern_objs/data_types/obj_str.hpp"
 #include "extern_objs/data_structs/struct_dict.hpp"
@@ -209,7 +209,7 @@ int struct_call::calculate_lineno_from_lnotab() {
     return lineno;
 }
 
-bool struct_call::is_code_ended() {
+bool struct_call::is_code_not_ended() {
     return _pc < _codes->_bytecodes->get_length();
 }
 

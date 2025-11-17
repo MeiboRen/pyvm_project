@@ -1,4 +1,4 @@
-#include "ctrl_structs/struct_closure.hpp"
+#include "extern_objs/ctrl_structs/struct_closure.hpp"
 #include "extern_objs/data_types/obj_str.hpp"
 #include "extern_objs/data_structs/struct_list.hpp"
 #include "extern_objs/data_structs/struct_dict.hpp"

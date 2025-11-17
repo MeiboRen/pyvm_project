@@ -12,7 +12,9 @@ public:
     static const unsigned char BINARY_ADD = 23;
     static const unsigned char BINARY_SUBTRACT = 24;
     static const unsigned char BINARY_SUBSCR = 25;
+    static const unsigned char BINARY_FLOOR_DIVIDE = 26;
     static const unsigned char BINARY_TRUE_DIVIDE = 27;
+    static const unsigned char INPLACE_FLOOR_DIVIDE = 28;
     static const unsigned char INPLACE_ADD = 55;
     static const unsigned char INPLACE_SUBTRACT = 56;
     static const unsigned char INPLACE_MULTIPLY = 57;
@@ -60,6 +62,7 @@ public:
     static const unsigned char LOAD_DEREF = 136;
     static const unsigned char STORE_DEREF = 137;
     static const unsigned char CALL_FUNCTION_KW = 141;
+    static const unsigned char EXTENDED_ARG = 144;
     static const unsigned char FORMAT_VALUE = 155;
     static const unsigned char BUILD_CONST_KEY_MAP = 156;
     static const unsigned char BUILD_STRING = 157;

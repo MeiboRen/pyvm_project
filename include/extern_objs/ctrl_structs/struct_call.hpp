@@ -1,8 +1,8 @@
 #pragma once
 #include "builtin_objs/inner_array.hpp"
 #include "builtin_objs/inner_dict.hpp"
-#include "ctrl_structs/struct_code.hpp"
-#include "ctrl_structs/struct_func.hpp"
+#include "extern_objs/ctrl_structs/struct_code.hpp"
+#include "extern_objs/ctrl_structs/struct_func.hpp"
 #include "extern_objs/data_structs/struct_list.hpp"
 
 class loop_block {
@@ -53,6 +53,6 @@ public:
     int firstlineno();
     int current_lineno();
     int calculate_lineno_from_lnotab();
-    bool is_code_ended();
+    bool is_code_not_ended();
     base_obj *get_cell_obj(int index);
 };

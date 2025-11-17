@@ -1,5 +1,5 @@
-#include "ctrl_structs/struct_call.hpp"
-#include "ctrl_structs/trace.hpp"
+#include "extern_objs/ctrl_structs/struct_call.hpp"
+#include "extern_objs/ctrl_structs/trace.hpp"
 #include "extern_objs/data_types/obj_str.hpp"
 #include "extern_objs/data_structs/struct_list.hpp"
 
